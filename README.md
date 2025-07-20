@@ -4,7 +4,7 @@
 Proyek ini menggunakan tiga dataset:
 - users_data.csv (full)
 - cards_data.csv (full)
-- transactions_data.csv (hanya 53880 data yang dapat diimport)
+- transactions_data.csv (hanya 53823 data yang dapat diimport)
 
 ## Pembuatan Database
 CREATE DATABASE mandiri_sekuritas;
