@@ -6,12 +6,63 @@ Proyek ini menggunakan tiga dataset:
 - cards_data.csv (full)
 - transactions_data.csv (hanya 53880 data yang dapat diimport)
 
-Selanjutnya data akan digabungkan untuk memudahkan analisis
+## Pembuatan Database
+CREATE DATABASE mandiri_sekuritas;
+USE mandiri_sekuritas;
 
-## Langkah Pembuatan Gabungan Data
-1. Import ketiga file csv ke MySQL. Di sini saya menggunakan table data import wizard.
+## Pembuatan Tabel Kosong
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    current_age INT,
+    retirement_age INT,
+    birth_year INT,
+    birth_month INT,
+    gender VARCHAR(10),
+    address VARCHAR(255),
+    latitude FLOAT,
+    longitude FLOAT,
+    per_capita_income VARCHAR(20),
+    yearly_income VARCHAR(20),
+    total_debt VARCHAR(20),
+    credit_score INT,
+    num_credit_cards INT
+);
 
-2. Buat tabel gabungan `full_data`:
+CREATE TABLE cards (
+    id INT PRIMARY KEY,
+    client_id INT,
+    card_brand VARCHAR(50),
+    card_type VARCHAR(50),
+    card_number BIGINT,
+    expires VARCHAR(10),
+    cvv INT,
+    has_chip VARCHAR(10),
+    num_cards_issued INT,
+    credit_limit VARCHAR(20),
+    acct_open_date VARCHAR(20),
+    year_pin_last_changed INT,
+    card_on_dark_web VARCHAR(10)
+);
+
+CREATE TABLE transactions (
+    id BIGINT PRIMARY KEY,
+    date DATETIME,
+    client_id INT,
+    card_id INT,
+    amount VARCHAR(20),
+    use_chip VARCHAR(50),
+    merchant_id INT,
+    merchant_city VARCHAR(100),
+    merchant_state VARCHAR(10),
+    zip VARCHAR(10),
+    mcc INT,
+    errors VARCHAR(255)
+);
+
+Selanjutnya import ketiga file csv ke MySQL dengan menggunakan fitur table data import wizard
+
+## Pembuatan Gabungan Data
+Buat tabel gabungan `full_data`:
 CREATE TABLE full_data AS
 SELECT 
   t.id AS transaction_id,
